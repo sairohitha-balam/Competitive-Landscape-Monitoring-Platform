@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 // Define the API endpoint
 // Use the Vercel environment variable, or fall back to localhost for testing
 // const API_URL = (process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000') + '/api/insights/';
-const API_URL = 'https://monitor-backend.onrender.com/api/insights/';
+const API_URL = 'https://competitive-landscape-monitoring.onrender.com/api/insights/';
 
 // Define colors for our pie chart
 const COLORS = {
