@@ -8,8 +8,6 @@ class CompetitorViewSet(viewsets.ModelViewSet):
     """
     queryset = Competitor.objects.all().order_by('name')
     serializer_class = CompetitorSerializer
-    # We'll add permissions later, for now it's open
-    # permission_classes = [permissions.IsAuthenticated] 
 
 class InsightViewSet(viewsets.ModelViewSet):
     """

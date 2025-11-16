@@ -78,7 +78,6 @@ class Insight(TimeStampedModel):
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES, default='UNKNOWN')
     
     source_url = models.URLField(max_length=1000)
-    # The date the event *happened* (as best we can tell)
     event_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

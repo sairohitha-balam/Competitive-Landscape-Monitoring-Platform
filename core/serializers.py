@@ -26,11 +26,11 @@ class InsightSerializer(serializers.ModelSerializer):
         fields = [
             'id', 
             'competitor', 
-            'competitor_name', # Our custom field
+            'competitor_name', #custom field
             'title', 
             'summary', 
             'category',
-            'category_display', # Our custom field
+            'category_display', #custom field
             'source_url', 
             'event_date'
         ]

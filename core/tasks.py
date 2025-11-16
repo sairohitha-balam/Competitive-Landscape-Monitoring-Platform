@@ -1,13 +1,12 @@
 import requests
 import hashlib
 import os
-import joblib  # <-- NEW: To load our model
+import joblib
 from bs4 import BeautifulSoup
 from celery import shared_task
-from django.conf import settings # <-- NEW: To get BASE_DIR
-from .models import ScrapeTarget, Insight  # <-- NEW: Import Insight
+from django.conf import settings
+from .models import ScrapeTarget, Insight
 
-# --- NEW: Load the AI Model on startup ---
 # We load the model once when the worker starts, not inside the task
 MODEL_PATH = os.path.join(settings.BASE_DIR, 'ml_model', 'text_classifier.joblib')
 try:
@@ -18,9 +17,7 @@ except FileNotFoundError:
     print("--- Please run 'python ml_model/train_model.py' ---")
     text_classifier = None # Set to None so app can still run
 
-# -----------------------------------------------------------------------------
-# MASTER SCHEDULER TASK (Unchanged)
-# -----------------------------------------------------------------------------
+
 @shared_task
 def schedule_all_scrapes():
     """
@@ -39,9 +36,6 @@ def schedule_all_scrapes():
     return f"Queued {count} scrape tasks"
 
 
-# -----------------------------------------------------------------------------
-# INDIVIDUAL SCRAPER TASK (UPDATED)
-# -----------------------------------------------------------------------------
 @shared_task
 def scrape_url(target_id):
     """
@@ -91,9 +85,6 @@ def scrape_url(target_id):
             print(f"[Scraper Task {target_id}]: No changes detected for {target.url}")
             return
 
-        # ======================================================================
-        # --- CHANGE DETECTED! ---
-        # ======================================================================
         print(f"[Scraper Task {target_id}]: CHANGE DETECTED for {target.url}")
 
         # 8. --- NEW: Classify the text ---
