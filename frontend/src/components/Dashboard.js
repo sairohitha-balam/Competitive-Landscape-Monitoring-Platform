@@ -3,7 +3,8 @@ import axios from 'axios';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Define the API endpoint
-const API_URL = 'http://127.0.0.1:8000/api/insights/';
+// Use the Vercel environment variable, or fall back to localhost for testing
+const API_URL = (process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000') + '/api/insights/';
 
 // Define colors for our pie chart
 const COLORS = {
